@@ -11,27 +11,29 @@ reason: On AlphaSSL configuration you need `subjectAltName`
 
 yourfile.cfg **content**
 
-# -------------- BEGIN custom multicert.cnf -----
-HOME = .
-oid_section = new_oids
-[ new_oids ]
-[ req ]
-default_days = 730
-distinguished_name = req_distinguished_name
-encrypt_key = no
-string_mask = nombstr
-req_extensions = v3_req # Extensions to add to certificate request
-[ req_distinguished_name ]
-commonName              = *.evercam.io
-commonName_default      = *.evercam.io
-localityName            = Dublin 1
-organizationName        = Camba.tv Ltd
-emailAddress            = junaid@evercam.io
-countryName             = IE
-commonName_max = 64
-[ v3_req ]
-subjectAltName=DNS:ftp.evercam.io,DNS:blog.evercam.io,DNS:*.evercam.io
-# -------------- END custom openssl.cnf -----
+    # -------------- BEGIN custom multicert.cnf -----
+
+    HOME = .
+    oid_section = new_oids
+    [ new_oids ]
+    [ req ]
+    default_days = 730
+    distinguished_name = req_distinguished_name
+    encrypt_key = no
+    string_mask = nombstr
+    req_extensions = v3_req # Extensions to add to certificate request
+    [ req_distinguished_name ]
+    commonName              = *.evercam.io
+    commonName_default      = *.evercam.io
+    localityName            = Dublin 1
+    organizationName        = Camba.tv Ltd
+    emailAddress            = junaid@evercam.io
+    countryName             = IE
+    commonName_max = 64
+    [ v3_req ]
+    subjectAltName=DNS:ftp.evercam.io,DNS:blog.evercam.io,DNS:*.evercam.io
+
+    # -------------- END custom openssl.cnf -----
 
 create a `CSR` file with ` openssl req -new -key private.key -out multicert.csr -config multicert.cfg`
 
@@ -54,5 +56,4 @@ for `Azure` it doesnt accept straight crt files create PFX file first
 `openssl pkcs12 -export -out certificate.pfx -inkey private.key -in evercam.io.crt`
 
 add password as well, it will be asked while uploading PFX to Azure.
-
 
