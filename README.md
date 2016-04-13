@@ -57,3 +57,6 @@ for `Azure` it doesnt accept straight crt files create PFX file first
 
 add password as well, it will be asked while uploading PFX to Azure.
 
+SSL for Heroku
+
+`heroku certs:update evercam.io.crt(server.key) private.key --app APPNAME`
